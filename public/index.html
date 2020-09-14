@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#20201e" />
+    <meta name="description" content="Best app for ordering your favorite pizza" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />  
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+
+    <meta property="og:title" content="Pizza Joint is the fastest way to ordar pizza">
+    <meta name="description" property="og:description" content="Don't waste your time call us +43-680-5558-2559">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thirsty-hopper-b0ad0a.netlify.app/">
+    <meta property="og:image" content="https://images.pexels.com/photos/1596888/pexels-photo-1596888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Pizza Joint">
+    <meta property="og:image:width" content="1880" />
+    <meta property="og:image:height" content="1253" />
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pizza Joint is the fastest way to ordar pizza">
+    <meta name="twitter:description" content="Don't waste your time call us +43-680-5558-2559">
+    <meta name="twitter:image" content="https://images.pexels.com/photos/1596888/pexels-photo-1596888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+
+
+
+
+
+    <title>Pizza Joint</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+    <script>
+       if('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./serviceworker.js')
+                    .then((reg) => console.log('Success: ', reg.scope))
+                    .catch((err) => console.log('Failure: ', err));
+            })
+        }
+      // if ('serviceWorker' in navigator) {
+      //   window.addEventListener('load', () => {
+      //     navigator.serviceWorker.register('./serviceworker.js')
+      //       .then((reg) => console.log('Success: ', reg.scope))
+      //       .catch((err) => console.log('Failure: ', err));
+      //   });
+      // } else {
+      //   console.log('Service Worker is not supported by browser.');
+      // }
+    </script>
+  </body>
+</html>
