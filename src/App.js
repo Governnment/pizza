@@ -9,6 +9,7 @@ import Modal from './components/Modal';
 import { AnimatePresence} from 'framer-motion';
 
 function App() {
+
   const location = useLocation();
   const [pizza, setPizza] = useState({ base: "", toppings: [] });
   const [showModal, setShowModal] = useState(false);
