@@ -1,12 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import Modal from './Modal'
 
 //variants help clean up code
 const containerVariants = {
-  hidden/*initial*/: {
+  hidden /*initial*/: {
     opacity: 0,
-    x: '100vw'
+    x: '100vw',
   },
   visible: {
     opacity: 1,
@@ -15,19 +16,19 @@ const containerVariants = {
       type: 'spring',
       mass: 0.4,
       damping: 8,
-      when: "beforeChildren",
-      staggerChildren: 0.4
-    }
+      when: 'beforeChildren',
+      staggerChildren: 0.4,
+    },
   },
   exit: {
     x: '-100vw',
-    transition: { ease: 'easeInOut'}
-  }
+    transition: { ease: 'easeInOut' },
+  },
 }
 
 const nextVariants = {
-  hidden:{
-    x: '100vw'
+  hidden: {
+    x: '100vw',
   },
   visible: {
     x: 0,
@@ -35,51 +36,69 @@ const nextVariants = {
       type: 'spring',
       mass: 0.4,
       damping: 8,
-      when: "beforeChildren",
-      staggerChildren: 0.4
-    }
-  }
+      when: 'beforeChildren',
+      staggerChildren: 0.4,
+    },
+  },
 }
 
 const buttonVariants = {
   hover: {
     scale: 0.8,
-    textShadow: "0px 0px 8px rgb(255,255,255)",
-    boxShadow: "0px 0px 8px rgb(255,255,255)",
+    textShadow: '0px 0px 8px rgb(255,255,255)',
+    boxShadow: '0px 0px 8px rgb(255,255,255)',
     transition: {
       duration: 0.2,
-    }
-  }
+    },
+  },
 }
 
 const Base = ({ addBase, pizza }) => {
-  const bases = ['Classic', 'Thin & Crispy', 'Thick Crust'];
+  const bases = ['Classic', 'Thin & Crispy', 'Thick Crust']
+
+  const [show, setShow] = useState(false)
+  const [baseFill, setBaseFill] = useState('')
+
+  const selectBaseFill = (baseFill) => {
+    setShow(true)
+    setBaseFill(baseFill)
+  }
 
   return (
-    <motion.div className="base container"
+    <motion.div
+      className='base container'
       variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
+      initial='hidden'
+      animate='visible'
+      exit='exit'
     >
-
       <h3>Step 1: Choose Your Base</h3>
       <ul>
-        {bases.map(base => {
-          let spanClass = pizza.base === base ? 'active' : '';
+        {bases.map((base, index) => {
+          let spanClass = pizza.base === base ? 'active' : ''
           return (
-            <motion.li key={base} onClick={() => addBase(base)}
+            <motion.li
+              key={base}
+              onClick={() => addBase(base)}
               whileHover={{ scale: 1.3, originX: 0, color: '#f8e112' }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <span className={spanClass}>{ base }</span>
+              <span className={spanClass}>{base}</span>
+              <p
+                key={baseFill + index}
+                onClick={() => selectBaseFill(baseFill)}
+              >
+                {baseFill}
+              </p>
+              {show && <Modal pizza={baseFill} />}
             </motion.li>
           )
         })}
       </ul>
 
       {pizza.base && (
-        <motion.div className="next"
+        <motion.div
+          className='next'
           variants={nextVariants}
           /*
       
@@ -88,17 +107,15 @@ const Base = ({ addBase, pizza }) => {
           initial="hidden"
           animate="visible"*/
         >
-          <Link to="/toppings">
-          <motion.button
-            variants={buttonVariants}
-            whileHover="hover"
-          >Next</motion.button>
+          <Link to='/toppings'>
+            <motion.button variants={buttonVariants} whileHover='hover'>
+              Next
+            </motion.button>
           </Link>
         </motion.div>
       )}
-
     </motion.div>
   )
 }
 
-export default Base;
+export default Base

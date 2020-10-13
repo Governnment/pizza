@@ -22,7 +22,7 @@ const modal = {
   },
 }
 
-const Modal = ({ showModal, setShowModal, pizza }) => {
+const Modal = ({ showModal, setShowModal, baseFill }) => {
   return (
     <AnimatePresence exitBeforeEnter>
       {showModal && (
@@ -36,7 +36,8 @@ const Modal = ({ showModal, setShowModal, pizza }) => {
           <motion.div className='modal' variants={modal}>
             <p>Wanna make another pizza?</p>
 
-            <img src={Pizza} />
+            <img alt={baseFill} src={`images/${baseFill}.jpg`} />
+            {/* <img src={Pizza} /> */}
 
             <a href='tel: +43-680-5558-2559'>
               <button>Order</button>
